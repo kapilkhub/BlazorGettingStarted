@@ -8,6 +8,7 @@ namespace BethanysPieShopHRM.App.Components.Widgets
         [Inject]
         public ApplicationState? ApplicationState { get; set; }
 
+        
         public int MessageCount { get; set; } = 0;
 
         protected override void OnInitialized()

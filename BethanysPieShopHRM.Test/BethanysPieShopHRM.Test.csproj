@@ -7,6 +7,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Include="Widget\InboxWidgetTests.razor" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<Using Include="Bunit" />
 		<Using Include="Bunit.TestDoubles" />
 		<Using Include="Microsoft.Extensions.DependencyInjection" />
