@@ -1,0 +1,1 @@
+dotnet new --install bunit.template::1.9.8
