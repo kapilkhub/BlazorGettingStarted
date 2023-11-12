@@ -44,5 +44,8 @@ namespace BethanysPieShopHRM.Shared.Domain
         [NotMapped]
         public byte[]? ImageContent { get; set; }
         public string? ImageName { get; set; }
+
+	
+		public ICollection<EmployeeBenefit> EmployeeBenefits { get; set; } = new List<EmployeeBenefit>();
     }
 }

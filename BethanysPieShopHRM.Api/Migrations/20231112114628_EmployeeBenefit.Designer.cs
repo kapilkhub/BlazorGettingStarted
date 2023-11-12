@@ -4,6 +4,7 @@ using BethanysPieShopHRM.Api.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BethanysPieShopHRM.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231112114628_EmployeeBenefit")]
+    partial class EmployeeBenefit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,38 +42,6 @@ namespace BethanysPieShopHRM.Api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Benefit");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Health Insurance",
-                            Premium = false
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Paid Time Off",
-                            Premium = false
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "Wellness",
-                            Premium = true
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Description = "Education",
-                            Premium = true
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Description = "Store Discount",
-                            Premium = false
-                        });
                 });
 
             modelBuilder.Entity("BethanysPieShopHRM.Shared.Domain.Country", b =>
