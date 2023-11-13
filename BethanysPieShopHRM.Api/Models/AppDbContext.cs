@@ -13,6 +13,7 @@ namespace BethanysPieShopHRM.Api.Models
 		public DbSet<Employee> Employees { get; set; }
 		public DbSet<Country> Countries { get; set; }
 		public DbSet<JobCategory> JobCategories { get; set; }
+		public DbSet<Benefit> Benefits { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{

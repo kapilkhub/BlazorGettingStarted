@@ -24,6 +24,10 @@ builder.Services.AddHttpClient<IJobCategoryDataService, JobCategoryDataService>
 	(client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
 	.AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
+builder.Services.AddHttpClient<IBenefitDataService, BenefitDataService>
+	(client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
+	.AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
+
 
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddScoped<ApplicationState>();
