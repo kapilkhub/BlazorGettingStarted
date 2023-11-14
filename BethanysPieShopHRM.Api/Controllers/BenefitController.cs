@@ -8,7 +8,7 @@ namespace BethanysPieShopHRM.Api.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
-	
+	[Authorize]
 	public class BenefitController: Controller
 	{
 		private readonly IBenefitRepository _benefitRepository;
@@ -17,6 +17,7 @@ namespace BethanysPieShopHRM.Api.Controllers
         {
 			_benefitRepository = benefitRepository;
 		}
+
         [HttpGet("{employeeId}")]
 		public async Task<ActionResult<EmployeeBenefitModel>> GetEmployeeBenefit(int employeeId)
 		{

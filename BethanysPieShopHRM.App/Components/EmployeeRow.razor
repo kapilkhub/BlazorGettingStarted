@@ -1,4 +1,5 @@
-﻿<tr>
+﻿
+<tr class="@(hasPremiumBenefits?"table-success":"")">
 	<td class="align-middle"><img src="@($"https://gillcleerenpluralsight.blob.core.windows.net/person/{@Employee.EmployeeId}-small.jpg")" class="rounded-circle" /></td>
 	<td class="align-middle">@Employee.EmployeeId</td>
 	<td class="align-middle">@Employee.FirstName</td>
@@ -16,5 +17,9 @@
 </tr>
 @if (showBenefits)
 {
-	<tr> Benefit Selector</tr>
+	<tr>
+		<td colspan="6">
+			<BenefitSelector Employee="Employee" OnPremiumToggle="PremiumToggle" />
+		</td>
+	</tr>
 }

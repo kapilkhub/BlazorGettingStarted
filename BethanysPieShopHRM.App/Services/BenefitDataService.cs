@@ -1,5 +1,6 @@
 ﻿using BethanysPieShopHRM.Shared.Domain;
 using BethanysPieShopHRM.Shared.Model;
+using System.Text.Json;
 
 namespace BethanysPieShopHRM.App.Services
 {
@@ -11,9 +12,10 @@ namespace BethanysPieShopHRM.App.Services
         {
 			_httpClient = httpClient;
 		}
-        public Task<IEnumerable<EmployeeBenefitModel>> GetForEmployee(Employee employee)
+        public async Task<IEnumerable<EmployeeBenefitModel>> GetForEmployee(Employee employee)
 		{
-			throw new NotImplementedException();
+			return await JsonSerializer.DeserializeAsync<IEnumerable<EmployeeBenefitModel>>
+			   (await _httpClient.GetStreamAsync($"api/benefit/{employee.EmployeeId}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
 		}
 	}
 }

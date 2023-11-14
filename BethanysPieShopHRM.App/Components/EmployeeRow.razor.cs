@@ -10,5 +10,12 @@ namespace BethanysPieShopHRM.App.Components
 
         private bool showBenefits { get; set; }
 
+        private bool hasPremiumBenefits;
+
+        public void PremiumToggle(bool premiumBenefit)
+        {
+			hasPremiumBenefits = premiumBenefit;
+        }
+
 	}
 }

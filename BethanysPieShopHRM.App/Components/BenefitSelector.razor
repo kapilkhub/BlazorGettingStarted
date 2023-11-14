@@ -1,5 +1,51 @@
-﻿<h3>BenefitSelector</h3>
+﻿@if (benefits == null)
+{
+	<p><em>Loading...</em></p>
+}
 
-@code {
+else
+{
+
+	<div class="row">
+		<div class="col-md-8">
+			<table class="table table-sm">
+				<thead>
+					<tr>
+						<th class="w-auto"></th>
+						<th class="w-auto">Benefit</th>
+						<th class="w-25">Start Date</th>
+						<th class="w-25">End Date</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var benefit in benefits)
+					{
+						<tr @key="benefit">
+							<td>
+								<input type="checkbox" checked="@benefit.Selected"
+							   @onchange="e => CheckBoxChanged(e,benefit)" />
+							</td>
+							<td>@benefit.Description</td>
+							@if (benefit.Selected)
+							{
+								<td>@benefit?.StartDate?.ToString("dd/MM/yyyy")</td>
+								<td><input type="date" @bind=benefit.EndDate /></td>
+							}
+							else
+							{
+								<td></td>
+								<td></td>
+							}
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-4 mt-1">
+			<button class="btn-primary" disabled="@SaveButtonDisabled" @onclick="SaveClick">
+				Save
+			</button>
+		</div>
+	</div>
 
 }
