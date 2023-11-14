@@ -3,6 +3,7 @@
 @inject LazyAssemblyLoader LazyAssemblyLoader
 
 <CascadingAuthenticationState>
+	<CascadingValue Value="@Theme" IsFixed=true>
 	<Router AppAssembly="@typeof(App).Assembly"
 			AdditionalAssemblies="@lazyLoadedAssemblies" OnNavigateAsync="@OnNavigateAsync">
 		<Found Context="routeData">
@@ -29,13 +30,15 @@
 			</LayoutView>
 		</NotFound>
 	</Router>
+	</CascadingValue>
 </CascadingAuthenticationState>
 
 @code {
 	private List<Assembly> lazyLoadedAssemblies = new List<Assembly>();
+	private Theme Theme = new Theme();
 	private async Task OnNavigateAsync(NavigationContext args)
 	{
-		if (args.Path.Contains("employeedetail"))
+		if (args.Path.Contains("employeedetail") || args.Path.Contains("employeeoverviewlist"))
 		{
 			var assemblies = await LazyAssemblyLoader.LoadAssembliesAsync(new string[] { "BethanysPieShopHRM.ComponentsLibrary.dll" });
 			lazyLoadedAssemblies.AddRange(assemblies);

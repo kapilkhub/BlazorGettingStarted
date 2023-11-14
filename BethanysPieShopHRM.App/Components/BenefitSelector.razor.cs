@@ -18,6 +18,9 @@ namespace BethanysPieShopHRM.App.Components
 		[Parameter]
 		public EventCallback<bool>  OnPremiumToggle { get; set; }
 
+		[CascadingParameter]
+		public Theme Theme { get; set; }
+
 		private bool SaveButtonDisabled = true;
 
 		private async Task CheckBoxChanged(ChangeEventArgs e, EmployeeBenefitModel benefit)
@@ -38,6 +41,7 @@ namespace BethanysPieShopHRM.App.Components
 			SaveButtonDisabled = true;
 		}
 
+		
 		protected override async Task OnInitializedAsync()
 		{
 			benefits  = await BenefitDataService.GetForEmployee(Employee);

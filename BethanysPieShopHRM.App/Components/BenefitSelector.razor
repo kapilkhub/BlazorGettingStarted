@@ -29,7 +29,8 @@ else
 							@if (benefit.Selected)
 							{
 								<td>@benefit?.StartDate?.ToString("dd/MM/yyyy")</td>
-								<td><input type="date" @bind=benefit.EndDate /></td>
+								<td><DateField @bind-Date="benefit!.EndDate" /> </td>
+								
 							}
 							else
 							{
@@ -42,7 +43,7 @@ else
 			</table>
 		</div>
 		<div class="col-md-4 mt-1">
-			<button class="btn-primary" disabled="@SaveButtonDisabled" @onclick="SaveClick">
+			<button class="@Theme.ButtonClass" disabled="@SaveButtonDisabled" @onclick="SaveClick">
 				Save
 			</button>
 		</div>
