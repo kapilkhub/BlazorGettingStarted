@@ -24,6 +24,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<BlazorWebAssemblyLazyLoad Include="BethanysPieShopHRM.ComponentsLibrary.dll" />
+		<!--<BlazorWebAssemblyLazyLoad Include="BethanysPieShopHRM.ComponentsLibrary.dll" />-->
 	</ItemGroup>
 </Project>

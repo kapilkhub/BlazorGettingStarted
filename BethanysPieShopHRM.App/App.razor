@@ -5,7 +5,8 @@
 <CascadingAuthenticationState>
 	<CascadingValue Value="@Theme" IsFixed=true>
 	<Router AppAssembly="@typeof(App).Assembly"
-			AdditionalAssemblies="@lazyLoadedAssemblies" OnNavigateAsync="@OnNavigateAsync">
+			
+	>
 		<Found Context="routeData">
 
 			<AuthorizeRouteView RouteData="@routeData"
@@ -34,6 +35,7 @@
 </CascadingAuthenticationState>
 
 @code {
+	//AdditionalAssemblies="@lazyLoadedAssemblies" OnNavigateAsync="@OnNavigateAsync"
 	private List<Assembly> lazyLoadedAssemblies = new List<Assembly>();
 	private Theme Theme = new Theme();
 	private async Task OnNavigateAsync(NavigationContext args)

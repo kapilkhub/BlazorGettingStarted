@@ -1,4 +1,5 @@
-<input type="date" value="@Date?.ToString("yyyy-MM-dd")" format-value="yyyy-MM-dd" @onchange="OnDateChanged" />
+<input type="date" value="@Date?.ToString("yyyy-MM-dd")" format-value="yyyy-MM-dd" @onchange="OnDateChanged"
+	   @attributes="InputAttributes" />
 <button class="btn btn-sm" @onclick="Revert">
 	<i class="oi oi-reload"></i>
 </button>

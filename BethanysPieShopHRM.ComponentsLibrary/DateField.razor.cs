@@ -12,6 +12,9 @@ namespace BethanysPieShopHRM.ComponentsLibrary
 		[Parameter]
 		public EventCallback<DateTimeOffset?> DateChanged { get; set; }
 
+		[Parameter(CaptureUnmatchedValues = true)]
+		public Dictionary<string, object> InputAttributes { get; set; }
+
 		public async Task Revert()
 		{
 			if (Date != origDate)

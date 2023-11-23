@@ -1,4 +1,5 @@
 ﻿using BethanysPieShopHRM.App.Services;
+using BethanysPieShopHRM.ComponentsLibrary;
 using BethanysPieShopHRM.Shared.Domain;
 using BethanysPieShopHRM.Shared.Model;
 using Microsoft.AspNetCore.Components;
@@ -21,6 +22,11 @@ namespace BethanysPieShopHRM.App.Components
 		[CascadingParameter]
 		public Theme Theme { get; set; }
 
+		private List<DateField> dateFields = new List<DateField>();
+		private DateField dateFieldRef { set { dateFields.Add(value); } }
+
+
+
 		private bool SaveButtonDisabled = true;
 
 		private async Task CheckBoxChanged(ChangeEventArgs e, EmployeeBenefitModel benefit)
@@ -41,7 +47,11 @@ namespace BethanysPieShopHRM.App.Components
 			SaveButtonDisabled = true;
 		}
 
-		
+		private void RevertClick()
+		{
+			dateFields.ForEach(async df => await df.Revert());
+		}
+
 		protected override async Task OnInitializedAsync()
 		{
 			benefits  = await BenefitDataService.GetForEmployee(Employee);
