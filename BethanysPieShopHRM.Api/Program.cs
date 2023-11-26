@@ -41,6 +41,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddHealthChecks()
+    .AddSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection")!);
+
 var app = builder.Build();
 
 
@@ -61,6 +65,8 @@ app.UseHttpsRedirection();
 app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();
 
+
+
 app.UseRouting();
 
 app.UseAuthentication();
@@ -71,5 +77,7 @@ app.UseCors("Open");
 app.MapControllers();
 
 app.MapFallbackToFile("index.html");
+
+app.MapHealthChecks("/health");
 
 app.Run();

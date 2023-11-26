@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: bethanyspieshophrm
+    project: bethanyspieshop
+    tier: frontend
+    type: webapi
+  name: bethanyspieshophrm
+  namespace: bethany
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: bethanyspieshophrm
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: bethanyspieshophrm
+    spec:
+      containers:
+      - image: acrkhubchandani.azurecr.io/bethanyspieshophrm:1.0
+        name: bethanyspieshophrm
+        ports: 
+        - containerPort: 80
+        env: 
+        - name: ASPNETCORE_URLS
+          value: "http://+:80" 
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Production"
+        - name: ConnectionStrings__DefaultConnection
+          valueFrom:
+            secretKeyRef:
+              key: DefaultConnection
+              name: dbconnectivity
+        livenessProbe:
+          httpGet:
+            port: 80
+            path: /health
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        readinessProbe:
+         httpGet:
+           port: 80
+           path: /health
+         initialDelaySeconds: 10
+         periodSeconds: 5
+        resources: {}
+status: {}

@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: scholarship-service
+    project: scholarship
+    tier: backend
+    type: microservice
+  name: scholarship-service
+  namespace: scholarship-local
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: scholarship-service
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: scholarship-service
+    spec:
+      containers:
+      - image: adek-tkg-harbor.adek.int/adscholarship-development/scholarship-service:1.1
+        name: scholarship-service
+        ports: 
+        - containerPort: 80
+        livenessProbe:
+          httpGet:
+            path: health
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: health
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        env:
+        - name: ASPNETCORE_URLS
+          value: "http://+:80"    
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Development"
+        resources: {}
+        volumeMounts:
+        - name: scholarship-service-development-config
+          mountPath: /app/Config
+          readOnly: true
+        - name: scholarship-development-secret
+          mountPath: /app/Secret
+          readOnly: true
+      volumes:
+        - name:  scholarship-service-development-config
+          configMap: 
+            name: scholarship-service-development-config
+        - name: scholarship-development-secret
+          secret:
+            secretName: scholarship-development-secret
+status: {}
