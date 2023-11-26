@@ -24,12 +24,13 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal
-  
-  scan:
-    runs-on: ubuntu-latest
-    steps:
-    - name: ZAP Scan
-      uses: zaproxy/action-full-scan@v0.8.0
+      run: dotnet test --no-build --verbosity normal --logger trx --results-directory "TestResults"
+    
+    - name: Upload Test Result
+      uses: actions/upload-artifact@v3
+      if: ${{always()}}
       with:
-        target: 'https://pieshop.kapilkhubchandani.de/'
+        name: test-results
+        path: TestResults
+  
+ 
