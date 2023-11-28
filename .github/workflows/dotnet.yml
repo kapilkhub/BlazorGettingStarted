@@ -12,6 +12,12 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    env:
+      Database__ServerName: sqlserver
+      Database__Port: 1433
+      Database__UserName: sa
+      Database__Password: P@ssw0rd1$
+      Database__UseLocalDatabase: "false"
 
     steps:
     - uses: actions/checkout@v3
