@@ -28,7 +28,7 @@ jobs:
          image: mcr.microsoft.com/mssql/server:2019-latest
          env:
            SA_PASSWORD: ${{env.Database__Password}}
-           ACCEPT_EUCLA: Y
+           ACCEPT_EULA: Y
          ports:
            - "1433:1433"
   
