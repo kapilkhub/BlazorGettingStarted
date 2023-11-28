@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Xunit.Abstractions;
 
 namespace BethanysPieShopHrm.IntegrationTest
 {
@@ -16,7 +17,7 @@ namespace BethanysPieShopHrm.IntegrationTest
 		public IBenefitRepository BenefitRepository => _serviceProvider.GetRequiredService<IBenefitRepository>();
 
 		
-		public DatabaseFixture()
+		public DatabaseFixture(ITestOutputHelper outputHelper)
 		{
 			_config = InitConfiguration();
 			var serviceColletion = new ServiceCollection()
@@ -27,8 +28,10 @@ namespace BethanysPieShopHrm.IntegrationTest
 			.AddEntityFrameworkSqlServer()
 			.AddDbContext<AppDbContext>(options =>
 			{
+			string connectionString = GetConnectionString(_config["Database:UseLocalDatabase"] == "true");
+				outputHelper.WriteLine("conection string is {0}", connectionString);
 				options.UseSqlServer(
-					GetConnectionString(_config["Database:UseLocalDatabase"] == "true"))
+					connectionString)
 					.UseInternalServiceProvider(_serviceProvider);
 			});
 
