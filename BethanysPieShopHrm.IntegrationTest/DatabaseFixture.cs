@@ -11,13 +11,14 @@ namespace BethanysPieShopHrm.IntegrationTest
 		AppDbContext _context;
 		private IConfiguration _config;
 		private readonly ServiceProvider _serviceProvider;
+		public string Connectionstring { get; set; }
 		public IEmployeeRepository EmployeeRepository => _serviceProvider.GetRequiredService<IEmployeeRepository>();
 		public IJobCategoryRepository JobCategoryRepository => _serviceProvider.GetRequiredService<IJobCategoryRepository>();
 		public ICountryRepository CountryRepository => _serviceProvider.GetRequiredService<ICountryRepository>();
 		public IBenefitRepository BenefitRepository => _serviceProvider.GetRequiredService<IBenefitRepository>();
 
 		
-		public DatabaseFixture(ITestOutputHelper outputHelper)
+		public DatabaseFixture()
 		{
 			_config = InitConfiguration();
 			var serviceColletion = new ServiceCollection()
@@ -28,10 +29,9 @@ namespace BethanysPieShopHrm.IntegrationTest
 			.AddEntityFrameworkSqlServer()
 			.AddDbContext<AppDbContext>(options =>
 			{
-			string connectionString = GetConnectionString(_config["Database:UseLocalDatabase"] == "true");
-				outputHelper.WriteLine("conection string is {0}", connectionString);
+			 Connectionstring = GetConnectionString(_config["Database:UseLocalDatabase"] == "true");
 				options.UseSqlServer(
-					connectionString)
+					Connectionstring)
 					.UseInternalServiceProvider(_serviceProvider);
 			});
 
