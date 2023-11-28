@@ -1,54 +1,27 @@
-﻿using Microsoft.Extensions.Configuration;
-using Xunit.Abstractions;
+﻿using Xunit.Abstractions;
 
 namespace BethanysPieShopHrm.IntegrationTest
 {
-	//[Collection("Database Collection")]
+	[Collection("Database Collection")]
 	public class EmployeeRepositoryTest
 	{
-		//private readonly DatabaseFixture _fixture;
-		private readonly IConfiguration _config;
-		private readonly ITestOutputHelper outputHelper;
+		private readonly DatabaseFixture _fixture;
+		private readonly ITestOutputHelper _testOutputHelper;
 
-		public EmployeeRepositoryTest(ITestOutputHelper outputHelper)
+		public EmployeeRepositoryTest(DatabaseFixture fixture, ITestOutputHelper testOutputHelper)
 		{
-			//_fixture = fixture;
-			_config = InitConfiguration();
-			this.outputHelper = outputHelper;
+			_fixture = fixture;
+			_testOutputHelper = testOutputHelper;
 		}
 
 		[Fact]
 		public void Should_create_Database()
 		{
-			outputHelper.WriteLine("connection string is =================" + GetConnectionString(_config["Database:UseLocalDatabase"] == "true"));
-			Assert.True(true);
-		}
-		private static IConfiguration InitConfiguration()
-		{
-			return new ConfigurationBuilder()
-							.AddJsonFile("appsettings.test.json")
-						   .AddEnvironmentVariables()
-						   .Build();
-		}
-		private string GetConnectionString(bool useLocalDatabase)
-		{
+			_testOutputHelper.WriteLine("Connetion string is" + _fixture.Connectionstring);
+			var employee = _fixture.EmployeeRepository.GetAllEmployees();
 
-			if (useLocalDatabase)
-			{
-				return "Server=(localdb)\\mssqllocaldb;Database=BethanysPieShopHRMTest;Trusted_Connection=True;MultipleActiveResultSets=true;";
-			}
-			else
-			{
-
-#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
-				string serverName = _config["Database:ServerName"] + "," + _config["Database:Port"]; ;
-				string databaseName = _config["Database:DatabaseName"];
-				string userName = _config["Database:UserName"];
-				string password = _config["Database:Password"];
-#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
-				return "Server=" + serverName + ";Database=" + databaseName + ";User Id=" + userName + ";Password=" + password;
-			}
-
+			Assert.Single(employee);
 		}
+	
 	}
 }

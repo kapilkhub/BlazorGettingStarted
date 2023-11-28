@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Xunit.Abstractions;
 
 namespace BethanysPieShopHrm.IntegrationTest
 {
@@ -54,7 +53,7 @@ namespace BethanysPieShopHrm.IntegrationTest
 
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
 				string serverName = _config["Database:ServerName"] + "," + _config["Database:Port"]; ;
-				string databaseName = _config["Database:DatabaseName"];
+				string databaseName = "BethanysPieShopHRM_" + Guid.NewGuid();
 				string userName = _config["Database:UserName"];
 				string password = _config["Database:Password"];
 #pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
