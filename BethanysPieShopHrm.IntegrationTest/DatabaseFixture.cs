@@ -57,7 +57,7 @@ namespace BethanysPieShopHrm.IntegrationTest
 				string userName = _config["Database:UserName"];
 				string password = _config["Database:Password"];
 #pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
-			   return "Server=" + serverName + ";Database=" + databaseName + ";User Id=" + userName + ";Password=" + password;
+			   return "Server=" + serverName + ";Database=" + databaseName + ";User Id=" + userName + ";Password=" + password+ ";TrustServerCertificate=True;Encrypt=False;";
 			}
 
 		}
