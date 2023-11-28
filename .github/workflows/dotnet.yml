@@ -18,6 +18,18 @@ jobs:
       Database__UserName: sa
       Database__Password: P@ssw0rd1$
       Database__UseLocalDatabase: "false"
+    
+    container:
+       image: mcr.microsoft.com/dotnet/sdk:7.0
+    services:
+      sqlserver:
+         image: mcr.microsoft.com/mssql/server:2019-latest
+         env:
+           SA_PASSWORD: ${{env.Database__Password}}
+           ACCEPT_EUCLA: Y
+         ports:
+           - "1433:1433"
+  
 
     steps:
     - uses: actions/checkout@v3
