@@ -1,0 +1,6 @@
+controller:
+  ingressClassResource:
+    name: bethany-nginx  # default: nginx
+    enabled: true
+    default: false
+    controllerValue: "k8s.io/bethany-ingress-nginx"  # default: k8s.io/ingress-nginx

@@ -1,0 +1,15 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: bethany-lets-encrypt
+  namespace: bethany
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: bethany-lets-encrypt
+    email: kapil.khubchandani7@gmail.com
+    solvers:
+    - http01:
+        ingress:
+          class: bethany-nginx

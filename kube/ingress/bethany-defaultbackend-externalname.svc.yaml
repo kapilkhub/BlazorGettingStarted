@@ -1,0 +1,8 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: profile
+  namespace: bethany
+spec:
+  type: ExternalName
+  externalName: kapilkhubchandani.my-profile.svc.cluster.local
